@@ -4,8 +4,11 @@ export default function NavBar() {
 
   const navLinkStyles = ({ isActive }) => {
     return {
+      display: 'inline-block',
+      color: 'white',
       fontWeight: isActive ? 'bold' : 'normal',
-      textDecoration: isActive ? 'underline' : 'none'
+      textDecoration: !isActive ? 'underline' : 'none',
+      padding: '1.5rem 2rem',
     };
   };
 
