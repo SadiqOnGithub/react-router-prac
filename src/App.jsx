@@ -11,6 +11,9 @@ import NewProducts from "./components/NewProducts";
 import Users from "./components/Users";
 import UserDetails from "./components/UserDetails";
 import Admin from "./components/Admin";
+import Profile from "./components/Profile";
+import Login from "./components/Login";
+import RequireAuth from "./components/RequireAuth";
 
 const LazyAbout = lazy(() => import('./components/About'));
 
@@ -21,9 +24,9 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="about" element={
-        <Suspense fallback="Loading...">
-          <LazyAbout />
-        </Suspense>
+          <Suspense fallback="Loading...">
+            <LazyAbout />
+          </Suspense>
         } />
         <Route path="order-summary" element={<OrderSummary />} />
         <Route path="products" element={<Products />}>
@@ -35,6 +38,12 @@ function App() {
           <Route path=":userId" element={<UserDetails />} />
           <Route path="admin" element={<Admin />} />
         </Route>
+        <Route path="profile" element={
+          <RequireAuth>
+            <Profile />
+          </RequireAuth>
+        } />
+        <Route path="login" element={<Login />} />
         <Route path="*" element={<NoMatch />} />
       </Routes>
     </>
