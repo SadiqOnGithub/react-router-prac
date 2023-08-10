@@ -1,6 +1,7 @@
+import { Suspense, lazy } from "react";
 import { Route, Routes } from "react-router-dom";
 import Home from "./components/Home";
-import About from "./components/About";
+// import About from "./components/About";
 import NavBar from "./components/NavBar";
 import OrderSummary from "./components/OrderSummary";
 import NoMatch from "./components/NoMatch";
@@ -11,6 +12,7 @@ import Users from "./components/Users";
 import UserDetails from "./components/UserDetails";
 import Admin from "./components/Admin";
 
+const LazyAbout = lazy(() => import('./components/About'));
 
 function App() {
   return (
@@ -18,7 +20,11 @@ function App() {
       <NavBar />
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="about" element={<About />} />
+        <Route path="about" element={
+        <Suspense fallback="Loading...">
+          <LazyAbout />
+        </Suspense>
+        } />
         <Route path="order-summary" element={<OrderSummary />} />
         <Route path="products" element={<Products />}>
           <Route index element={<FeaturedProducts />} />
